@@ -13,7 +13,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("site/browserconfig.xml");
     eleventyConfig.addPassthroughCopy("site/_redirects");
 
-    eleventyConfig.addNunjucksFilter("date", function (date, format = "YYYY-MM-DD") {
+    eleventyConfig.addNunjucksFilter("date", function(date, format = "YYYY-MM-DD") {
         return moment(date).format(format);
     });
 
@@ -23,6 +23,7 @@ module.exports = function(eleventyConfig) {
         return md.render(string);
     });
 
+    // TODO: does not seem to be working
     eleventyConfig.addTransform('purifycss', async function(content, outputPath) {
         if (outputPath.endsWith(".html")) {
             return new Promise((resolve) => {
@@ -37,7 +38,7 @@ module.exports = function(eleventyConfig) {
         return content;
     });
 
-    eleventyConfig.addTransform('htmlminifier', async function (content, outputPath) {
+    eleventyConfig.addTransform('htmlminifier', async function(content, outputPath) {
         if (outputPath.endsWith(".html")) {
             return htmlminifier.minify(content, {
                 collapseWhitespace: true,
